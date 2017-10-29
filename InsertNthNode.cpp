@@ -1,82 +1,70 @@
 #include <iostream>
 using namespace std;
 
-struct Node
-{
+struct Node{
     int data;
     Node *next;
 };
 
-Node *Insert(Node *head, int num)
-{
+Node *Insert(Node * head, int num){
     Node *newNode = new Node();
     newNode->data = num;
     newNode->next = NULL;
 
-    if (head != NULL)
-    {
+    if (head!=NULL){
         newNode->next = head;
     }
     head = newNode;
     return head;
 }
 
-Node *InsertNthNode(Node *head, int element, int nth)
-{
+Node *InsertNthNode(Node *head, int element, int nth){
     Node *newNode = new Node();
     newNode->data = element;
     newNode->next = NULL;
-    if (nth == 1)
-    {
+    if (nth==1){
         newNode->next = head;
         head = newNode;
+
     }
-    else
-    {
+    else{
         Node *newNode2 = head;
-        for (int i = 1; i < nth - 1; i++)
-        {
+        for (int i = 1; i < nth -1; i++) {
             newNode2 = newNode2->next;
         }
         newNode->next = newNode2->next;
         newNode2->next = newNode;
         return head;
     }
+
 }
 
-Node *DeleteNthNode(Node *head, int position)
-{
+Node *DeleteNthNode(Node *head, int position){
     Node *newNode = head;
-    if (position == 1)
-    {
+    if (position==1){
         head = newNode->next;
         delete head;
     }
-    else
-    {
-        for (int i = 1; i < position - 1; i++)
-        {
+    else{
+        for (int i = 1; i < position-1; i++) {
             newNode = newNode->next;
         }
         Node *newNode2 = newNode->next;
-        newNode->next = newNode2->next;
+        newNode->next=newNode2->next;
         delete newNode2;
         return head;
     }
 }
 
-void Print(Node *head)
-{
-    while (head != NULL)
-    {
-        cout << head->data << " ";
+void Print(Node *head){
+    while (head!=NULL){
+        cout<<head->data<<" ";
         head = head->next;
     }
-    cout << endl;
+    cout<<endl;
 }
 
-int main()
-{
+int main() {
     Node *head = NULL;
     int n, i, x, y, nth;
     char m;
@@ -102,11 +90,10 @@ int main()
         head = InsertNthNode(head, y, nth);
         Print(head);
     }
-    if (m == 'y')
-    {
-        cout << "Please enter the position of the # to be deleted" << endl;
-        cin >> nth;
-        head = DeleteNthNode(head, nth);
+    if (m=='y'){
+        cout<<"Please enter the position of the # to be deleted"<<endl;
+        cin>>nth;
+        head=DeleteNthNode(head,nth);
         Print(head);
     }
 
